@@ -1,0 +1,33 @@
+#!/bin/bash
+
+while [[ -n "$1" ]]; do
+    case $1 in
+        clean )
+            ./gradlew clean
+            vagrant ssh -c "/vagrant/dockerw cleanup"
+            ;;
+        build )
+            ./gradlew build
+            vagrant ssh -c "/vagrant/dockerw build"
+            ;;
+        run )
+            vagrant ssh -c "/vagrant/dockerw run"
+            ;;
+        status )
+            vagrant status
+            ;;
+        start )
+            vagrant up
+            ;;
+        restart )
+            vagrant reload
+            ;;
+        stop )
+            vagrant halt
+            ;;
+        destroy )
+            vagrant destroy
+            ;;
+    esac
+    shift
+done

@@ -1,3 +1,7 @@
 .gradle/
 .vagrant/
 build/
+*.iml
+*.ipr
+*.iws
+out/

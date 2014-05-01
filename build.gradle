@@ -7,6 +7,7 @@ buildscript {
     }
 }
 
+apply plugin: 'idea'
 apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'spring-boot'

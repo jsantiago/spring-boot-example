@@ -31,6 +31,10 @@ dependencies {
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
+springBoot {
+    mainClass = "com.example.application.Application"
+}
+
 task createWrapper(type: Wrapper) {
     gradleVersion = '1.12'
 }

@@ -20,6 +20,11 @@ To run in Tomcat 8:
     ./environment clean build run
     open http://localhost:9000/spring-boot-example
 
+To create an executable jar:
+
+    ./gradlew clean build
+    java -jar build/libs/spring-boot-example.jar
+
 To view test results:
 
     ./gradlew test

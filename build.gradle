@@ -8,6 +8,7 @@ buildscript {
 }
 
 apply plugin: 'java'
+apply plugin: 'groovy'
 apply plugin: 'spring-boot'
 apply plugin: 'war'
 
@@ -22,7 +23,11 @@ configurations {
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-actuator")
+
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+
+    testCompile("org.codehaus.groovy:groovy-all:2.2.2")
+    testCompile("org.spockframework:spock-core:0.7-groovy-2.0")
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 

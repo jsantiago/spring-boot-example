@@ -1,6 +1,6 @@
-package com.example.application.web;
+package com.example.application.web
 
-import com.example.application.Application;
+import com.example.application.Application
 import org.springframework.boot.SpringApplication
 import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.http.HttpStatus

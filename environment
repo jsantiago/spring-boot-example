@@ -1,32 +1,58 @@
 #!/bin/bash
 
+set -e
+
+clean() {
+    ./gradlew clean
+    vagrant ssh -c "/vagrant/dockerw cleanup"
+}
+
+build() {
+    ./gradlew build
+    vagrant ssh -c "/vagrant/dockerw build"
+}
+
+run() {
+    vagrant ssh -c "/vagrant/dockerw run"
+}
+
+status() {
+    vagrant status
+}
+
+start() {
+    vagrant up
+}
+
+restart() {
+    vagrant reload
+}
+
+stop() {
+    vagrant halt
+}
+
+destroy() {
+    vagrant destroy
+}
+
 while [[ -n "$1" ]]; do
     case $1 in
-        clean )
-            ./gradlew clean
-            vagrant ssh -c "/vagrant/dockerw cleanup"
+        clean ) clean
             ;;
-        build )
-            ./gradlew build
-            vagrant ssh -c "/vagrant/dockerw build"
+        build ) build
             ;;
-        run )
-            vagrant ssh -c "/vagrant/dockerw run"
+        run ) run
             ;;
-        status )
-            vagrant status
+        status ) status
             ;;
-        start )
-            vagrant up
+        start ) start
             ;;
-        restart )
-            vagrant reload
+        restart ) restart
             ;;
-        stop )
-            vagrant halt
+        stop ) stop
             ;;
-        destroy )
-            vagrant destroy
+        destroy ) destroy
             ;;
     esac
     shift

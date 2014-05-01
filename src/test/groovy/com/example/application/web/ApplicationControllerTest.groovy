@@ -1,10 +1,13 @@
 package com.example.application.web
 
 import com.example.application.Application
+import com.example.application.domain.Message
 import org.springframework.boot.SpringApplication
 import org.springframework.context.ConfigurableApplicationContext
+import org.springframework.http.HttpEntity
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.client.HttpServerErrorException
 import org.springframework.web.client.RestTemplate
 import spock.lang.AutoCleanup
 import spock.lang.Shared
@@ -33,11 +36,39 @@ class ApplicationControllerTest extends Specification {
 
     void "should return 'Hello World!'"() {
         when:
-        ResponseEntity entity = new RestTemplate().getForEntity("http://localhost:8080", String.class)
+            ResponseEntity entity = new RestTemplate().getForEntity("http://localhost:8080", String.class)
 
         then:
-        entity.statusCode == HttpStatus.OK
-        entity.body == 'Hello World!'
+            entity.statusCode == HttpStatus.OK
+            entity.body == 'Hello World!'
+    }
+
+    void "should reverse a string"(String title, String original, String reversed) {
+        given:
+            HttpEntity requestEntity = new HttpEntity<Message>([title: title, value: original] as Message)
+
+        when:
+            ResponseEntity entity = new RestTemplate().postForEntity("http://localhost:8080/reverse", requestEntity, Message.class)
+
+        then:
+            entity.statusCode == HttpStatus.OK
+            entity.body.title == title
+            entity.body.value == reversed
+
+        where:
+            title | original | reversed
+            'string' | 'Hello World!' | '!dlroW olleH'
+            'null' | null | null
+            'empty string' | '' | null
+            'whitespace' | ' ' | ' '
+    }
+
+    void "should throw an exception"() {
+        when:
+            new RestTemplate().getForEntity("http://localhost:8080/foo", String.class)
+
+        then:
+            thrown HttpServerErrorException
     }
 
 }

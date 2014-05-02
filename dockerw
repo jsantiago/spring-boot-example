@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 REPO="docker-tomcat"
@@ -12,7 +14,7 @@ REPO="docker-tomcat"
 HOST_PORT="80"
 CONTAINER_PORT="8080"
 
-function setup {
+setup() {
     if [[ -z "$MOUNT" && -n "$HOST_MOUNT" && -n "$CONTAINER_MOUNT" ]]; then
         MOUNT="-v $HOST_MOUNT:$CONTAINER_MOUNT"
     fi
@@ -22,17 +24,17 @@ function setup {
     fi
 }
 
-function build {
+build() {
     setup
     docker build --rm -t $REPO $SCRIPT_DIR
 }
 
-function run {
+run() {
     setup
     docker run --rm $PORT $MOUNT -i -t $REPO
 }
 
-function cleanup {
+cleanup() {
     # Remove stopped containers
     CONTAINERS=$(docker ps  -a | grep 'Exit' | awk '{print $1}')
     if [[ -n $CONTAINERS ]]; then
@@ -46,16 +48,21 @@ function cleanup {
     fi
 }
 
-function remove {
+remove() {
     IMAGE=$(docker images | grep $REPO | awk '{print $3}')
     if [[ -n $IMAGE ]]; then
         docker rmi $IMAGE
     fi
 }
 
-function usage {
+usage() {
     echo "Usage: $0 [build | [-v hostMount:containerMount] [-p hostPort:containerPort] run | cleanup | remove]"
 }
+
+if [[ $# == 0 ]];then
+    usage
+    exit 1
+fi
 
 MOUNT=""
 PORT=""

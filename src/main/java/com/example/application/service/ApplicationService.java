@@ -10,7 +10,15 @@ public class ApplicationService {
     private ServiceProperties configuration;
 
     public String sayHello() {
-        return "Hello " + configuration.getName() + "!";
+        return "Hello " + getConfiguration().getName() + "!";
+    }
+
+    public ServiceProperties getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(ServiceProperties configuration) {
+        this.configuration = configuration;
     }
 
 }

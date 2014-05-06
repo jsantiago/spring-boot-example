@@ -20,7 +20,7 @@ public class ApplicationController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     @ResponseBody
     public String home() {
-        return applicationService.sayHello();
+        return getApplicationService().sayHello();
     }
 
     @RequestMapping(value = "/reverse", method = RequestMethod.POST)
@@ -51,4 +51,13 @@ public class ApplicationController {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(ApplicationController.class, args);
     }
+
+    public ApplicationService getApplicationService() {
+        return applicationService;
+    }
+
+    public void setApplicationService(ApplicationService applicationService) {
+        this.applicationService = applicationService;
+    }
+
 }

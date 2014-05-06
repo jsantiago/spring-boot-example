@@ -36,7 +36,7 @@ class ApplicationControllerTest extends Specification {
 
     void "should return 'Hello World!'"() {
         when:
-            ResponseEntity entity = new RestTemplate().getForEntity("http://localhost:8080", String.class)
+            ResponseEntity entity = new RestTemplate().getForEntity("http://localhost:8080/hello", String.class)
 
         then:
             entity.statusCode == HttpStatus.OK

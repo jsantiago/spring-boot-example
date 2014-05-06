@@ -17,7 +17,7 @@ public class ApplicationController {
     @Autowired
     private ApplicationService applicationService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
     @ResponseBody
     public String home() {
         return getApplicationService().sayHello();

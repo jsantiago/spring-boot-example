@@ -12,13 +12,13 @@ To create Gradle wrapper:
 To run:
 
     ./gradlew bootRun
-    open http://localhost:8080
+    ./ping.sh --spring-boot
 
-To run in Tomcat 8:
+To run in Tomcat:
 
     ./environment up
     ./environment clean build run
-    open http://localhost:9000/spring-boot-example
+    ./ping.sh --war
 
 To create an executable jar:
 

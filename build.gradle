@@ -43,3 +43,5 @@ task createWrapper(type: Wrapper) {
 
 // Make sure that bootRepackage builds an executable jar *and* a war
 bootRepackage.dependsOn = [jar, war]
+
+buildDir = "docker/build"

@@ -22,7 +22,7 @@ status() {
 
 start() {
     build
-    run
+    cd $SCRIPT_DIR/docker && vagrant up --provider=docker
 }
 
 restart() {
